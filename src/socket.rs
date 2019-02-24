@@ -2,7 +2,11 @@
 
 use std::fmt;
 use std::io;
-use std::net::{IpAddr, Ipv6Addr, SocketAddr, ToSocketAddrs, UdpSocket};
+#[cfg(feature = "usnet")]
+use usnet_sockets::{UdpSocket, UsnetToSocketAddrs as ToSocketAddrs};
+#[cfg(not(feature = "usnet"))]
+use std::net::{UdpSocket, ToSocketAddrs};
+use std::net::{IpAddr, Ipv6Addr, SocketAddr};
 
 use address::socket_address_equal;
 use message::{DecodeError, DnsError, EncodeError, Message, MESSAGE_LIMIT};

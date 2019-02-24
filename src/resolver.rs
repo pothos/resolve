@@ -2,7 +2,7 @@
 
 use std::cell::Cell;
 use std::io;
-use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr, ToSocketAddrs};
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr};
 use std::time::{Duration, Instant};
 use std::vec::IntoIter;
 
@@ -11,6 +11,11 @@ use config::DnsConfig;
 use message::{Message, Qr, Question, MESSAGE_LIMIT};
 use record::{A, AAAA, Class, Ptr, Record, RecordType};
 use socket::{DnsSocket, Error};
+
+#[cfg(feature = "usnet")]
+use usnet_sockets::UsnetToSocketAddrs as ToSocketAddrs;
+#[cfg(not(feature = "usnet"))]
+use std::net::ToSocketAddrs;
 
 /// Performs resolution operations
 pub struct DnsResolver {

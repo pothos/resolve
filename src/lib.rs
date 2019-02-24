@@ -7,6 +7,9 @@ extern crate libc;
 #[macro_use] extern crate log;
 extern crate rand;
 
+#[cfg(feature = "usnet")]
+extern crate usnet_sockets;
+
 pub use address::address_name;
 pub use config::DnsConfig;
 pub use idna::{to_ascii, to_unicode};

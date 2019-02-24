@@ -19,3 +19,8 @@ idna = "0.1"
 libc = "0.2"
 log = "0.4"
 rand = "0.5"
+usnet_sockets = { git = "https://github.com/ANLAB-KAIST/usnet_sockets", optional = true }
+
+[features]
+usnet = ["usnet_sockets"]
+netmap = ["usnet_sockets/netmap"]
